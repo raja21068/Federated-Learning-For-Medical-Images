@@ -29,21 +29,20 @@ An example of preprocessing BraTS dataset can be found at <code> utils/preproces
 
 ## Links for downloading the public datasets:
 
-1) fastMRI Dataset - <a href="https://fastmri.med.nyu.edu/"> Link </a>  
-2) IXI Dataset - <a href="https://brain-development.org/ixi-dataset/"> Link </a> 
-3) BraTS Dataset - <a href="https://www.med.upenn.edu/cbica/brats2020/data.html"> Link </a> 
+
+1) BraTS Dataset - <a href="https://www.med.upenn.edu/cbica/brats2020/data.html"> Link </a> 
 
 
 
 # Run
 
-## train FL-MR
+## train FL-CT-SCANS
 ```bash 
-python main_fl_mr.py --phase train --dataset mri --model unet --epochs 50 --challenge singlecoil --local_bs 16 --num_users 4 --local_ep 2 --train_dataset BFHI --test_dataset H --sequence T1  --accelerations 4 --center-fractions 0.08 --val_sample_rate 1.0 --save_dir 'Dir path for saving checkpoints' --verbose
+python fl_images.py --phase train --dataset mri --model unet --epochs 50 --challenge singlecoil --local_bs 16 --num_users 4 --local_ep 2 --train_dataset BFHI --test_dataset H --sequence T1  --accelerations 4 --center-fractions 0.08 --val_sample_rate 1.0 --save_dir 'Dir path for saving checkpoints' --verbose
 ```
-## train FL-MRCM
+## train FL-multi-images
 ```bash 
-python main_fl_mrcm.py --phase train --dataset mri --model unet --epochs 50 --challenge singlecoil --local_bs 16 --num_users 4 --local_ep 2 --train_dataset BFHI --test_dataset B --sequence T1 --accelerations 4 --center-fractions 0.08 --val_sample_rate 1.0 --save_dir 'Dir path for saving checkpoints' --verbose
+python fl_multi-images.py --phase train --dataset mri --model unet --epochs 50 --challenge singlecoil --local_bs 16 --num_users 4 --local_ep 2 --train_dataset BFHI --test_dataset B --sequence T1 --accelerations 4 --center-fractions 0.08 --val_sample_rate 1.0 --save_dir 'Dir path for saving checkpoints' --verbose
 ```
 ## monitor the traning process
 ```bash 
@@ -51,4 +50,4 @@ tensorboard --logdir 'Dir path for saving checkpoints'
 ```
 ## test
 ```bash 
-python main_test.py --phase test --dataset mri --challenge singlecoil --local_bs 16 --model unet --test_dataset I --sequence T1 --accelerations 4 --center-fractions 0.08 --save_dir 'Dir path for saving result'  --checkpoint 'checkpoint path for testing'  --verbose
+python test.py --phase test --dataset mri --challenge singlecoil --local_bs 16 --model unet --test_dataset I --sequence T1 --accelerations 4 --center-fractions 0.08 --save_dir 'Dir path for saving result'  --checkpoint 'checkpoint path for testing'  --verbose
